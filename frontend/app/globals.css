@@ -1,0 +1,477 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────
+   디자인 토큰 (DESIGN-notion.md 그대로 반영 — 임의로 색/폰트를 새로 정하지 않음)
+   다크모드는 이번 스코프에서 만들지 않음(토글 없음, 팀원 담당).
+   ───────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* --- Colors --- */
+  --color-primary: #0075de;
+  --color-primary-active: #005bab;
+  --color-secondary: #213183;
+  --color-on-primary: #ffffff;
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #f6f5f4;
+  --color-surface: #ffffff;
+  --color-ink: #000000;
+  --color-ink-secondary: #31302e;
+  --color-ink-muted: #615d59;
+  --color-ink-faint: #a39e98;
+  --color-hairline: #e6e6e6;
+  --color-accent-sky: #62aef0;
+  --color-accent-purple: #d6b6f6;
+  --color-accent-purple-deep: #391c57;
+  --color-accent-pink: #ff64c8;
+  --color-accent-orange: #dd5b00;
+  --color-accent-orange-deep: #793400;
+  --color-accent-teal: #2a9d99;
+  --color-accent-green: #1aae39;
+  --color-accent-brown: #523410;
+
+  /* --- Radius --- */
+  --radius-xs: 4px;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* --- Font family: NotionInter는 비공개 폰트라 Inter로 대체(DESIGN.md 명시 사항).
+     Inter는 라틴 문자만 지원해서 한글은 Pretendard로 폴백(CDN, layout.js에서 로드). --- */
+  --font-sans: var(--font-inter), Inter, Pretendard, -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+  /* 히어로 배지 라벨용 모노스페이스(홈 리디자인, DESIGN.md엔 없던 토큰 추가) */
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* --- Typography (font-size + line-height + letter-spacing + weight 세트) ---
+     spacing은 DESIGN.md 토큰(xxs4/xs8/sm12/md16/lg24/xl28/xxl32)이 Tailwind 기본
+     spacing 스케일(4px 단위)과 그대로 맞아떨어져서 별도 토큰 없이 p-1~p-8을 그대로 씀
+     (p-1=4=xxs, p-2=8=xs, p-3=12=sm, p-4=16=md, p-6=24=lg, p-7=28=xl, p-8=32=xxl). */
+  --text-display-1: 64px;
+  --text-display-1--line-height: 1.0;
+  --text-display-1--letter-spacing: -2.125px;
+  --text-display-1--font-weight: 700;
+
+  --text-display-2: 54px;
+  --text-display-2--line-height: 1.04;
+  --text-display-2--letter-spacing: -1.875px;
+  --text-display-2--font-weight: 700;
+
+  --text-heading-1: 40px;
+  --text-heading-1--line-height: 1.1;
+  --text-heading-1--letter-spacing: -1px;
+  --text-heading-1--font-weight: 700;
+
+  --text-heading-2: 26px;
+  --text-heading-2--line-height: 1.23;
+  --text-heading-2--letter-spacing: -0.625px;
+  --text-heading-2--font-weight: 700;
+
+  --text-heading-3: 22px;
+  --text-heading-3--line-height: 1.27;
+  --text-heading-3--letter-spacing: -0.25px;
+  --text-heading-3--font-weight: 700;
+
+  --text-title: 20px;
+  --text-title--line-height: 1.4;
+  --text-title--letter-spacing: -0.125px;
+  --text-title--font-weight: 600;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.5;
+  --text-body-md--letter-spacing: 0px;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 15px;
+  --text-body-sm--line-height: 1.33;
+  --text-body-sm--letter-spacing: 0px;
+  --text-body-sm--font-weight: 400;
+
+  --text-button: 16px;
+  --text-button--line-height: 1.5;
+  --text-button--letter-spacing: 0px;
+  --text-button--font-weight: 500;
+
+  --text-caption: 14px;
+  --text-caption--line-height: 1.43;
+  --text-caption--letter-spacing: 0px;
+  --text-caption--font-weight: 400;
+
+  --text-eyebrow: 12px;
+  --text-eyebrow--line-height: 1.33;
+  --text-eyebrow--letter-spacing: 0.125px;
+  --text-eyebrow--font-weight: 600;
+
+  /* --- Elevation (DESIGN.md "barely-there" 레벨 1/2, 하드 드롭섀도 금지) --- */
+  --shadow-elevation-1:
+    0 0.175px 1.041px rgba(0, 0, 0, 0.01),
+    0 0.8px 2.925px rgba(0, 0, 0, 0.02),
+    0 2.025px 7.847px rgba(0, 0, 0, 0.027),
+    0 4px 18px rgba(0, 0, 0, 0.04);
+  --shadow-elevation-2:
+    0 0.3px 1.6px rgba(0, 0, 0, 0.015),
+    0 1.3px 4.5px rgba(0, 0, 0, 0.025),
+    0 3.3px 11px rgba(0, 0, 0, 0.035),
+    0 8px 22px rgba(0, 0, 0, 0.045),
+    0 23px 52px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  background: var(--color-canvas-soft);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   컴포넌트 프리미티브 (DESIGN.md의 components: 섹션 그대로)
+   ───────────────────────────────────────────────────────────────────────── */
+@layer components {
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    font: var(--text-button) / var(--text-button--line-height) var(--font-sans);
+    font-weight: var(--text-button--font-weight);
+    border-radius: var(--radius-full);
+    padding: 12px 24px;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+  }
+  .btn-primary:hover,
+  .btn-primary:active {
+    background-color: var(--color-primary-active);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+  .btn-primary:disabled {
+    background-color: var(--color-ink-faint);
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font: var(--text-button) / var(--text-button--line-height) var(--font-sans);
+    font-weight: var(--text-button--font-weight);
+    border-radius: var(--radius-full);
+    padding: 12px 24px;
+    box-shadow: var(--shadow-elevation-1);
+  }
+
+  .btn-utility {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font: var(--text-button) / var(--text-button--line-height) var(--font-sans);
+    font-weight: var(--text-button--font-weight);
+    border-radius: var(--radius-md);
+    padding: 4px 14px;
+    border: 1px solid var(--color-hairline);
+  }
+  .btn-utility[aria-current="page"] {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .feature-card {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    border: 1px solid var(--color-hairline);
+  }
+
+  .feature-card-elevated {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-elevation-1);
+  }
+
+  /* 홈 히어로 전용 — Optimus 템플릿 참고(라인 + 모노스페이스 대문자 라벨), pill 아님 */
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font: 13px / 1.4 var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .hero-eyebrow-line {
+    width: 32px;
+    height: 1px;
+    background-color: var(--color-ink-faint);
+    flex-shrink: 0;
+  }
+
+  /* 홈 히어로 CTA — Optimus의 알약+화살표 구조 참고, 색은 기존 primary 유지 */
+  .btn-hero-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    font: var(--text-button) / var(--text-button--line-height) var(--font-sans);
+    font-weight: var(--text-button--font-weight);
+    border-radius: var(--radius-full);
+    padding: 14px 28px;
+    transition: background-color 0.15s ease;
+  }
+  .btn-hero-primary:hover {
+    background-color: var(--color-primary-active);
+    box-shadow: var(--shadow-elevation-1);
+    transform: translateY(-1px);
+  }
+  .btn-hero-primary .hero-cta-arrow {
+    transition: transform 0.15s ease;
+  }
+  .btn-hero-primary:hover .hero-cta-arrow {
+    transform: translateX(3px);
+  }
+
+  .btn-hero-outline {
+    display: inline-flex;
+    align-items: center;
+    /* 히어로 섹션 배경(--color-canvas-soft)과 겹쳐 안 보이던 문제라, 평소 상태부터
+       흰 배경(--color-surface)을 줘서 버튼 윤곽이 처음부터 또렷하게 보이게 함 */
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font: var(--text-button) / var(--text-button--line-height) var(--font-sans);
+    font-weight: var(--text-button--font-weight);
+    border-radius: var(--radius-full);
+    padding: 14px 28px;
+    border: 1px solid var(--color-hairline);
+    transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .btn-hero-outline:hover {
+    /* 히어로 섹션 배경이 --color-canvas-soft라서, hover 배경도 같은 토큰을 쓰면
+       색이 겹쳐 안 보였음(실측 버그) — 순백(--color-surface)으로 바꿔 실제 대비를 만듦 */
+    background-color: var(--color-surface);
+    border-color: var(--color-ink);
+    box-shadow: var(--shadow-elevation-1);
+    transform: translateY(-1px);
+  }
+
+  /* 히어로 하단 통계(브랜드 수/데이터 항목/TOP20 대상) — Optimus 원본엔 이 숫자들이
+     끊임없이 좌우로 흐르는 marquee였는데, 실제 데이터로 옮기며 정적 행으로 바뀌어
+     있었음(움직임이 빠진 상태). 내용을 2벌 복제해 -50% 이동으로 이음매 없이
+     무한 반복시킴 — 새 라이브러리 없이 순수 CSS. */
+  .stats-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+  }
+  .stats-marquee-track {
+    display: flex;
+    align-items: baseline;
+    width: max-content;
+    animation: stats-marquee-scroll 22s linear infinite;
+  }
+  /* gap 대신 항목마다 margin-right을 줘야, 복제된 두 묶음의 폭이 정확히 반반으로
+     나뉘어서 -50% 지점에서 이음매 없이 반복된다(gap은 마지막 항목 뒤엔 안 붙어서
+     반씩 어긋나 끊겨 보이는 문제가 있었음). */
+  .stats-marquee-track > div {
+    margin-right: 64px;
+  }
+  .stats-marquee:hover .stats-marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes stats-marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stats-marquee-track {
+      animation: none;
+    }
+  }
+
+  /* 히어로 우측 고정 답변 프리뷰 카드 — 실제 챗봇 답변 화면의 일부처럼 보이도록
+     "예시 질문/답변 요약/근거" 3단 구조로 만들고, 근거 박스를 가장 눈에 띄게 처리
+     (GPT 피드백: 근거가 이 서비스의 차별점이면 근거 영역이 더 두드러져야 함).
+     아래 질문 칩 hover에 맞춰 내용이 바뀜(page.js activeIndex) — 자동 순환이 아니라
+     사용자 상호작용에 반응하는 것만 허용(GPT 피드백: 자동 순환은 오해 위험). */
+  .answer-preview-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    box-shadow: var(--shadow-elevation-1);
+  }
+
+  /* 칩 hover로 activeIndex가 바뀔 때마다 React key가 바뀌어 이 요소가 다시 마운트되고,
+     그때마다 이 애니메이션이 재생됨 — 내용이 뚝 끊기지 않고 부드럽게 전환됨 */
+  .answer-preview-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: answerPreviewFade 0.25s ease;
+  }
+
+  @keyframes answerPreviewFade {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .answer-preview-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .answer-preview-label {
+    font: 11px / 1.3 var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+
+  .answer-preview-question {
+    font: var(--text-title) / var(--text-title--line-height) var(--font-sans);
+    font-weight: var(--text-title--font-weight);
+    color: var(--color-ink);
+  }
+
+  .answer-preview-summary {
+    font: var(--text-body-sm) / var(--text-body-sm--line-height) var(--font-sans);
+    color: var(--color-ink-muted);
+    /* 예시마다 문장 길이가 달라 카드 높이가 흔들리는 걸 막음 — 3줄 기준 고정,
+       그보다 짧은 예시는 아래 여백만 남고 넘치면 잘림(현재 4개 예시는 2~3줄) */
+    min-height: calc(var(--text-body-sm--line-height) * var(--text-body-sm) * 3);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .answer-preview-evidence-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    border-left: 3px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+  }
+  .answer-preview-evidence-head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .answer-preview-evidence-label {
+    font: 11px / 1.3 var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+  .answer-preview-evidence-path {
+    font: 14px / 1.3 var(--font-mono);
+    color: var(--color-ink);
+  }
+  .answer-preview-evidence-meta {
+    margin: 0;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-hairline);
+    font: 12px / 1.3 var(--font-sans);
+    color: var(--color-ink-faint);
+  }
+
+  .answer-preview-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    font: var(--text-caption) / var(--text-caption--line-height) var(--font-sans);
+    font-weight: 600;
+    color: var(--color-primary);
+    transition: gap 0.15s ease;
+  }
+  .answer-preview-action:hover {
+    gap: 10px;
+  }
+
+  .hero-chip-label {
+    font: 11px / 1.3 var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+
+  /* 예시 질문 칩 — 현재 프리뷰 카드에 반영된 칩은 채워진 배경으로 확실히 구분 */
+  .btn-utility[data-active="true"] {
+    color: var(--color-on-primary);
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+  }
+
+  /* 대표 기능 카드(채팅) 안의 예시 라인 — 실제 채팅 말풍선처럼 보이도록 강조 */
+  .primary-card-example {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font: 14px / 1.3 var(--font-mono);
+    background-color: var(--color-canvas-soft);
+    border-left: 3px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 10px 16px;
+  }
+  .primary-card-example-q {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .primary-card-example-evidence {
+    color: var(--color-ink-muted);
+  }
+
+  /* "준비 중" 배지 — 파란색은 활성 기능처럼 보여서 중립 회색으로 낮춤 */
+  .badge-pill--muted {
+    color: var(--color-ink-faint);
+    background-color: var(--color-canvas-soft);
+  }
+
+  .badge-pill {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    font: var(--text-eyebrow) / var(--text-eyebrow--line-height) var(--font-sans);
+    font-weight: var(--text-eyebrow--font-weight);
+    letter-spacing: var(--text-eyebrow--letter-spacing);
+    border-radius: var(--radius-full);
+    padding: 4px 8px;
+  }
+
+  .text-input {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font: var(--text-body-sm) / var(--text-body-sm--line-height) var(--font-sans);
+    border: 1px solid #dddddd;
+    border-radius: var(--radius-xs);
+    padding: 6px 10px;
+  }
+  .text-input:focus {
+    outline: none;
+    box-shadow: var(--shadow-elevation-1);
+    border-color: var(--color-primary);
+  }
+
+  .nav-bar {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font: var(--text-body-sm) / var(--text-body-sm--line-height) var(--font-sans);
+    padding: 16px;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+}

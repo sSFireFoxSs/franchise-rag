@@ -1,0 +1,37 @@
+# 비밀값
+.env
+.env.*
+!.env.example
+
+# 로컬 에이전트·개인 메모 (공개하지 않음)
+CLAUDE.md
+CLAUDE_LOG_ARCHIVE.md
+AGENTS.md
+.claude/
+
+# --- backend (Python) ---
+.venv/
+__pycache__/
+*.pyc
+backend/logs/
+
+# 데이터: 용량이 크거나 원본을 다시 받을 수 있는 것은 올리지 않는다.
+# clauses.jsonl.gz(추출 결과)와 골드셋만 올린다. 나머지는 scripts/01~03, 11로 다시 만든다.
+backend/data/**
+!backend/data/disclosure/
+!backend/data/disclosure/clauses.jsonl.gz
+!backend/data/qa/
+!backend/data/qa/rag_gold_40.json
+
+# 브랜드 로고 이미지: 각 브랜드의 상표라 올리지 않는다 (tools/logos/logos.py로 다시 만든다)
+frontend/public/logos/
+tools/logos/_work/
+
+# --- frontend (Next.js) ---
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# --- OS ---
+.DS_Store
+Thumbs.db

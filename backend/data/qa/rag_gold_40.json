@@ -1,0 +1,54 @@
+[
+  {"no": 1, "group": "A.가맹비/가맹금", "question": "GS25 예치가맹금 중 상품준비금이 얼마야?", "brands": ["GS25"], "expect_contains": ["14,000,000"], "note": "amounts.label='상품준비금'"},
+  {"no": 2, "group": "A.가맹비/가맹금", "question": "도미노피자 최초 가맹금 중 교육비가 얼마야?", "brands": ["도미노피자"], "expect_contains": ["2,750,000"], "note": "체크리스트 B-11 동일 사실"},
+  {"no": 3, "group": "A.가맹비/가맹금", "question": "종로김밥 예치가맹금 합계가 얼마야?", "brands": ["종로김밥"], "expect_contains": ["7,500,000"], "note": "체크리스트 B-6 동일 사실"},
+  {"no": 4, "group": "A.가맹비/가맹금", "question": "핸델앤그레텔 예치가맹금 합계가 얼마야?", "brands": ["핸델앤그레텔"], "expect_contains": ["12,000,000"], "note": "체크리스트 B-8, 만원단위 환산 검증"},
+  {"no": 5, "group": "A.가맹비/가맹금", "question": "파파존스피자 예치가맹금 합계가 얼마야?", "brands": ["파파존스피자"], "expect_contains": ["42,000,000"], "note": "체크리스트 B-10, 헤더단위(천원) 인식 검증"},
+
+  {"no": 6, "group": "B.보증금", "question": "GS25 보증금 총액이 얼마야?", "brands": ["GS25"], "expect_contains": ["22,700,000"], "note": "체크리스트 B-9 동일 사실"},
+  {"no": 7, "group": "B.보증금", "question": "파파존스피자 보증금 총계가 얼마야?", "brands": ["파파존스피자"], "expect_contains": ["20,000,000"], "note": "체크리스트 A-4 동일 사실"},
+
+  {"no": 8, "group": "C.교육비", "question": "도미노피자 신규 교육 비용이 얼마야?", "brands": ["도미노피자"], "expect_contains": ["2,750,000"], "note": ""},
+  {"no": 9, "group": "C.교육비", "question": "파파존스피자 교육 비용이 얼마야?", "brands": ["파파존스피자"], "expect_contains": ["11,000,000"], "note": ""},
+
+  {"no": 10, "group": "D.로열티", "question": "종로김밥 영업 중 비용 부담(로열티)이 얼마야?", "brands": ["종로김밥"], "expect_contains": ["1,000,000"], "note": "교육훈련비 항목"},
+  {"no": 11, "group": "D.로열티", "question": "GS25는 로열티(영업 중 비용부담) 관련해서 어떻게 되어 있어?", "brands": ["GS25"], "expect_contains": [], "note": "amounts 비어있는 케이스 — 구조화조회인데 금액이 없을 때 폴백(텍스트 스니펫) 동작 확인용"},
+
+  {"no": 12, "group": "E.평균매출액", "question": "GS25 가맹점사업자 평균 매출액이 얼마야?", "brands": ["GS25"], "expect_contains": ["643,718,000"], "note": "2024년 말 기준"},
+  {"no": 13, "group": "E.평균매출액", "question": "도미노피자 가맹점사업자 평균 매출액이 얼마야?", "brands": ["도미노피자"], "expect_contains": ["730,953,000"], "note": ""},
+  {"no": 14, "group": "E.평균매출액", "question": "종로김밥 가맹점사업자 평균 매출액이 얼마야?", "brands": ["종로김밥"], "expect_contains": ["398,537,000"], "note": ""},
+
+  {"no": 15, "group": "F.행정처분(통계조회)", "question": "GS25는 시정조치(행정처분) 받은 적 있어?", "brands": ["GS25"], "expect_contains": ["없음"], "note": "violation_flag=없음"},
+  {"no": 16, "group": "F.행정처분(통계조회)", "question": "도미노피자는 행정처분 받은 이력이 있어?", "brands": ["도미노피자"], "expect_contains": ["있음"], "note": "violation_flag=있음"},
+  {"no": 17, "group": "F.행정처분(통계조회)", "question": "파파존스피자는 행정처분 이력이 있어?", "brands": ["파파존스피자"], "expect_contains": ["있음"], "note": "violation_flag=있음"},
+  {"no": 18, "group": "F.행정처분(통계조회)", "question": "종로김밥은 행정처분 받은 적 있어?", "brands": ["종로김밥"], "expect_contains": ["없음"], "note": "violation_flag=없음"},
+
+  {"no": 19, "group": "G.비교(구조화)", "question": "GS25랑 도미노피자 중 보증금이 더 비싼 건 어디야?", "brands": ["GS25", "도미노피자"], "expect_contains": ["22,700,000"], "note": "도미노피자는 보증금 섹션은 있지만 amounts가 비어있어 '정보 없음' 처리되는지가 핵심 확인 포인트"},
+  {"no": 20, "group": "G.비교(구조화)", "question": "종로김밥이랑 핸델앤그레텔 예치가맹금을 비교해줘", "brands": ["종로김밥", "핸델앤그레텔"], "expect_contains": ["7,500,000", "12,000,000"], "note": ""},
+  {"no": 21, "group": "G.비교(구조화)", "question": "GS25와 종로김밥의 평균매출액을 비교해줘", "brands": ["GS25", "종로김밥"], "expect_contains": ["643,718,000", "398,537,000"], "note": ""},
+  {"no": 22, "group": "G.비교(구조화)", "question": "도미노피자와 파파존스피자 행정처분 이력을 비교해줘", "brands": ["도미노피자", "파파존스피자"], "expect_contains": ["있음"], "note": "둘 다 있음"},
+
+  {"no": 23, "group": "H.계약해지(서술형)", "question": "GS25 가맹계약 기간은 얼마나 돼?", "brands": ["GS25"], "expect_contains": [], "note": "GS1/GS2/GS3-type별 계약기간 표 언급 여부 확인"},
+  {"no": 24, "group": "H.계약해지(서술형)", "question": "도미노피자 가맹계약 기간이 몇 년이야?", "brands": ["도미노피자"], "expect_contains": ["3"], "note": "계약기간 3년, 갱신 3년"},
+  {"no": 25, "group": "H.계약해지(서술형)", "question": "종로김밥 가맹계약 기간이 몇 년이야?", "brands": ["종로김밥"], "expect_contains": ["2"], "note": "계약기간 2년"},
+  {"no": 26, "group": "H.계약해지(서술형)", "question": "핸델앤그레텔 가맹계약 기간이 몇 년이야?", "brands": ["핸델앤그레텔"], "expect_contains": ["2"], "note": "계약기간 2년, 갱신 1년"},
+  {"no": 27, "group": "H.계약해지(서술형)", "question": "종로김밥 재계약할 때 추가로 내야 하는 비용이 있어?", "brands": ["종로김밥"], "expect_contains": ["200"], "note": "재가맹비 200만원"},
+
+  {"no": 28, "group": "I.필수구입물품(서술형)", "question": "GS25는 필수구입물품 관련 조항이 어떻게 되어 있어?", "brands": ["GS25"], "expect_contains": ["소매업"], "note": "'소매업이라 해당사항 없음' 문구 확인"},
+  {"no": 29, "group": "I.필수구입물품(서술형)", "question": "도미노피자 가맹점 운영에 필요한 설비는 누구에게 공급받아야 해?", "brands": ["도미노피자"], "expect_contains": [], "note": "지정 공급업체 관련 서술 확인"},
+  {"no": 30, "group": "I.필수구입물품(서술형)", "question": "핸델앤그레텔은 특수관계인이 경제적 이익을 받고 있어?", "brands": ["핸델앤그레텔"], "expect_contains": ["않"], "note": "'수취하지 않고 있습니다'"},
+
+  {"no": 31, "group": "J.영업지역(서술형)", "question": "GS25 영업지역은 어떻게 설정돼?", "brands": ["GS25"], "expect_contains": [], "note": "점포간 거리제한/자율규약 언급 확인"},
+  {"no": 32, "group": "J.영업지역(서술형)", "question": "도미노피자는 영업지역 밖 판매를 제한해?", "brands": ["도미노피자"], "expect_contains": [], "note": "'별다른 제한을 가하고 있지 않습니다' 확인"},
+  {"no": 33, "group": "J.영업지역(서술형)", "question": "종로김밥은 온라인 유통채널로 상품을 공급해?", "brands": ["종로김밥"], "expect_contains": ["해당사항"], "note": "'해당사항 없습니다'"},
+
+  {"no": 34, "group": "K.소송법위반(서술형)", "question": "GS25는 최근 3년간 민사소송이나 화해한 적 있어?", "brands": ["GS25"], "expect_contains": ["없"], "note": "소송/법위반은 vector 카테고리지만 violation_flag도 있음 — 메타데이터 활용 여부 관찰"},
+  {"no": 35, "group": "K.소송법위반(서술형)", "question": "도미노피자는 형사처벌 받은 임원이 있어?", "brands": ["도미노피자"], "expect_contains": ["없"], "note": "형의 선고 없음"},
+  {"no": 36, "group": "K.소송법위반(서술형)", "question": "핸델앤그레텔은 민사소송 이력이 있어?", "brands": ["핸델앤그레텔"], "expect_contains": ["없"], "note": ""},
+
+  {"no": 37, "group": "L.위약금손해배상(서술형)", "question": "핸델앤그레텔 계약 위반 시 위약금이 얼마야?", "brands": ["핸델앤그레텔"], "expect_contains": ["10만원"], "note": "1일 10만원 위약벌"},
+  {"no": 38, "group": "L.위약금손해배상(서술형)", "question": "GS25 계약 위반하면 어떻게 돼?", "brands": ["GS25"], "expect_contains": [], "note": "손해배상액 예정/위약금 청구 가능 서술 확인"},
+
+  {"no": 39, "group": "M.범위밖", "question": "강남역 근처 상권 정보 좀 알려줘", "brands": [], "expect_contains": [], "note": "intent=커버불가 예상 (상권정보는 이 서비스 데이터 범위 밖)"},
+  {"no": 40, "group": "M.범위밖", "question": "카페베네 가맹비가 얼마야?", "brands": ["카페베네"], "expect_contains": ["정보공개서 데이터가 아직 없습니다"], "note": "체크리스트 G-18과 동일 — 원래는 '공정위 API 자체에 카페베네가 없어서'로 알고 있었으나, 작업로그 (31)에서 실제로는 brand_unified.jsonl에 이름(바리스텔라와 별칭 관계)은 있고 정보공개서 데이터만 없는 것으로 정정됨. 예전 메시지('브랜드를 찾을 수 없습니다')는 이름 자체를 모른다는 오해를 줬음 — 이제는 이름은 확인되고 데이터만 없다는 걸 구분해서 답해야 정상"}
+]
